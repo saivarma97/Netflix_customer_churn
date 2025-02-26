@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template
 import joblib
 import pandas as pd
+import pickle
 
 app = Flask(__name__)
 
@@ -8,7 +9,10 @@ app = Flask(__name__)
 model = joblib.load('model/churn_model.pkl')
 
 # Load the scaler
-scaler = joblib.load('model/scaler.pkl')
+#scaler = joblib.load('model/scaler.pkl')
+
+#using pickle
+scalar = pickle.load(open('scalar.pkl', 'rb'))
 
 # Load label encoders
 label_encoders = joblib.load('model/label_encoders.pkl')
@@ -30,7 +34,7 @@ def predict():
         df[column] = le.transform(df[column])
     
     # Scale numerical features
-    df[numerical_features] = scaler.transform(df[numerical_features])
+    df[numerical_features] = scalar.transform(df[numerical_features])
     
     # Make prediction
     prediction = model.predict(df)
