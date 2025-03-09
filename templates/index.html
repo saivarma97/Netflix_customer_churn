@@ -2,22 +2,90 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Customer Churn Prediction</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Churn Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            width: 40%;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px #aaa;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            font-size: 18px;
+            font-weight: bold;
+            color: #d9534f;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Customer Churn Prediction</h2>
-        <form action="/predict" method="post">
-            <!-- Add form fields for each feature -->
-            <label for="feature1">Feature 1:</label>
-            <input type="text" id="feature1" name="feature1" required>
-            <!-- Repeat for other features -->
-            <button type="submit">Predict</button>
-        </form>
-        {% if prediction_text %}
-            <h3>{{ prediction_text }}</h3>
-        {% endif %}
-    </div>
+    <h2>Netflix Customer Churn Prediction</h2>
+    <form action="/predict" method="post">
+        <label for="subscription_length">Subscription Length (Months):</label>
+        <input type="number" step="any" name="subscription_length" required>
+        
+        <label for="satisfaction_score">Customer Satisfaction Score (1-10):</label>
+        <input type="number" step="any" name="satisfaction_score" required>
+        
+        <label for="daily_watch_time">Daily Watch Time (Hours):</label>
+        <input type="number" step="any" name="daily_watch_time" required>
+        
+        <label for="engagement_rate">Engagement Rate (1-10):</label>
+        <input type="number" step="any" name="engagement_rate" required>
+        
+        <label for="support_queries">Support Queries Logged:</label>
+        <input type="number" step="any" name="support_queries" required>
+        
+        <label for="age">Age:</label>
+        <input type="number" step="any" name="age" required>
+        
+        <label for="monthly_income">Monthly Income ($):</label>
+        <input type="number" step="any" name="monthly_income" required>
+        
+        <label for="profiles_created">Number of Profiles Created:</label>
+        <input type="number" step="any" name="profiles_created" required>
+
+        <button type="submit">Predict Churn</button>
+    </form>
+
+    {% if prediction_text %}
+        <p class="output">{{ prediction_text }}</p>
+    {% endif %}
 </body>
 </html>
