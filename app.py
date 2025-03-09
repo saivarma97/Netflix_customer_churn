@@ -11,7 +11,7 @@ model = joblib.load('model.pkl')
 
 # Load the scaler properly
 with open('scaler.pkl', 'rb') as file:
-    scaler = pickle.load(file)  # ✅ Corrected variable name
+    scaler = pickle.load(file)
 
 @app.route('/')
 def home():
@@ -23,7 +23,7 @@ def predict():
         # Extract features from form
         features = [float(x) for x in request.form.values()]
         final_features = np.array(features).reshape(1, -1)
-        final_features = scaler.transform(final_features)  # ✅ Use 'scaler' instead of 'scalar'
+        final_features = scaler.transform(final_features) 
         prediction = model.predict(final_features)
         output = 'Churn' if prediction[0] == 1 else 'Not Churn'
     except Exception as e:
