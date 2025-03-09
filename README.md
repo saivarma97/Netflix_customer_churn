@@ -33,3 +33,5 @@ pip install -r requirements.txt
 python app.py
 
 ```
+# Here is the Landing page where user needs to enter the data
+![alt text](image.png)
